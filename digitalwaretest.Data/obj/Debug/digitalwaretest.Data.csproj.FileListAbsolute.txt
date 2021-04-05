@@ -1,0 +1,12 @@
+C:\Users\willi\source\repos\digitalwaretest\digitalwaretest.Data\bin\Debug\digitalwaretest.Data.dll.config
+C:\Users\willi\source\repos\digitalwaretest\digitalwaretest.Data\bin\Debug\digitalwaretest.Data.dll
+C:\Users\willi\source\repos\digitalwaretest\digitalwaretest.Data\bin\Debug\digitalwaretest.Data.pdb
+C:\Users\willi\source\repos\digitalwaretest\digitalwaretest.Data\bin\Debug\EntityFramework.dll
+C:\Users\willi\source\repos\digitalwaretest\digitalwaretest.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\willi\source\repos\digitalwaretest\digitalwaretest.Data\bin\Debug\EntityFramework.xml
+C:\Users\willi\source\repos\digitalwaretest\digitalwaretest.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\willi\source\repos\digitalwaretest\digitalwaretest.Data\obj\Debug\digitalwaretest.Data.csprojAssemblyReference.cache
+C:\Users\willi\source\repos\digitalwaretest\digitalwaretest.Data\obj\Debug\digitalwaretest.Data.csproj.CoreCompileInputs.cache
+C:\Users\willi\source\repos\digitalwaretest\digitalwaretest.Data\obj\Debug\digitalwaretest.Data.csproj.CopyComplete
+C:\Users\willi\source\repos\digitalwaretest\digitalwaretest.Data\obj\Debug\digitalwaretest.Data.dll
+C:\Users\willi\source\repos\digitalwaretest\digitalwaretest.Data\obj\Debug\digitalwaretest.Data.pdb

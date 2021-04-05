@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DIGITALWARETESTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CLIENTE">
+    <Key>
+      <PropertyRef Name="clienteId" />
+    </Key>
+    <Property Name="clienteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="numeroIdentificaionCliente" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="primerNombreCliente" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="primerApellidoCliente" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="segundoNombreCliente" Type="varchar" MaxLength="100" />
+    <Property Name="segundoApellidoCliente" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="tipoIdentificacionCliente" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="direccionCliente" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="correoCliente" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="telefonofijoCliente" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="telefonocelCliente" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="fechaNacimientoCliente" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FACTURA">
+    <Key>
+      <PropertyRef Name="facturaId" />
+    </Key>
+    <Property Name="facturaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="totalFactura" Type="float" Nullable="false" />
+    <Property Name="subtotalFactura" Type="float" Nullable="false" />
+    <Property Name="IVAFactura" Type="float" Nullable="false" />
+    <Property Name="fechaFactura" Type="datetime" Nullable="false" />
+    <Property Name="sedeId" Type="int" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="FACTURA_PRODUCTO">
+    <Key>
+      <PropertyRef Name="facturaId" />
+      <PropertyRef Name="productoId" />
+    </Key>
+    <Property Name="facturaId" Type="int" Nullable="false" />
+    <Property Name="productoId" Type="int" Nullable="false" />
+    <Property Name="cantidadFactura" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="INVENTARIO">
+    <Key>
+      <PropertyRef Name="inventarioId" />
+    </Key>
+    <Property Name="inventarioId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cantidad" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DIGITALWARETEST.dbo.INVENTARIO_PRODUCTO' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="INVENTARIO_PRODUCTO">
+    <Key>
+      <PropertyRef Name="inventarioId" />
+      <PropertyRef Name="productoId" />
+    </Key>
+    <Property Name="inventarioId" Type="int" Nullable="false" />
+    <Property Name="productoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PAIS">
+    <Key>
+      <PropertyRef Name="paisId" />
+    </Key>
+    <Property Name="paisId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombrePais" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PRODUCTO">
+    <Key>
+      <PropertyRef Name="productoId" />
+    </Key>
+    <Property Name="productoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombreProducto" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="marcaProducto" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="fechaExpedicionProducto" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="fechaVencimientoProducto" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="precioProducto" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="paisId" Type="int" />
+  </EntityType>
+  <EntityType Name="SEDE">
+    <Key>
+      <PropertyRef Name="sedeId" />
+    </Key>
+    <Property Name="sedeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombreSede" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="direccionSede" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="inventarioId" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="USUARIO">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="clienteId" Type="int" />
+  </EntityType>
+  <Association Name="FK__FACTURA__sedeId__0E6E26BF">
+    <End Role="SEDE" Type="Self.SEDE" Multiplicity="0..1" />
+    <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SEDE">
+        <PropertyRef Name="sedeId" />
+      </Principal>
+      <Dependent Role="FACTURA">
+        <PropertyRef Name="sedeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FACTURA__UserId__0F624AF8">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+    <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="FACTURA">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FACTURA_P__factu__114A936A">
+    <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="1" />
+    <End Role="FACTURA_PRODUCTO" Type="Self.FACTURA_PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FACTURA">
+        <PropertyRef Name="facturaId" />
+      </Principal>
+      <Dependent Role="FACTURA_PRODUCTO">
+        <PropertyRef Name="facturaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FACTURA_P__produ__123EB7A3">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+    <End Role="FACTURA_PRODUCTO" Type="Self.FACTURA_PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="productoId" />
+      </Principal>
+      <Dependent Role="FACTURA_PRODUCTO">
+        <PropertyRef Name="productoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRODUCTO__paisId__76969D2E">
+    <End Role="PAIS" Type="Self.PAIS" Multiplicity="0..1" />
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PAIS">
+        <PropertyRef Name="paisId" />
+      </Principal>
+      <Dependent Role="PRODUCTO">
+        <PropertyRef Name="paisId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SEDE__inventario__71D1E811">
+    <End Role="INVENTARIO" Type="Self.INVENTARIO" Multiplicity="0..1" />
+    <End Role="SEDE" Type="Self.SEDE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INVENTARIO">
+        <PropertyRef Name="inventarioId" />
+      </Principal>
+      <Dependent Role="SEDE">
+        <PropertyRef Name="inventarioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__USUARIO__cliente__7E37BEF6">
+    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENTE">
+        <PropertyRef Name="clienteId" />
+      </Principal>
+      <Dependent Role="USUARIO">
+        <PropertyRef Name="clienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INVENTARIO_PRODUCTO_INVENTARIO">
+    <End Role="INVENTARIO" Type="Self.INVENTARIO" Multiplicity="1" />
+    <End Role="INVENTARIO_PRODUCTO" Type="Self.INVENTARIO_PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INVENTARIO">
+        <PropertyRef Name="inventarioId" />
+      </Principal>
+      <Dependent Role="INVENTARIO_PRODUCTO">
+        <PropertyRef Name="inventarioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INVENTARIO_PRODUCTO_PRODUCTO">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+    <End Role="INVENTARIO_PRODUCTO" Type="Self.INVENTARIO_PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="productoId" />
+      </Principal>
+      <Dependent Role="INVENTARIO_PRODUCTO">
+        <PropertyRef Name="productoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DIGITALWARETESTModelStoreContainer">
+    <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FACTURA" EntityType="Self.FACTURA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FACTURA_PRODUCTO" EntityType="Self.FACTURA_PRODUCTO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="INVENTARIO" EntityType="Self.INVENTARIO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SEDE" EntityType="Self.SEDE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="INVENTARIO_PRODUCTO" EntityType="Self.INVENTARIO_PRODUCTO" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [INVENTARIO_PRODUCTO].[inventarioId] AS [inventarioId], 
+    [INVENTARIO_PRODUCTO].[productoId] AS [productoId]
+    FROM [dbo].[INVENTARIO_PRODUCTO] AS [INVENTARIO_PRODUCTO]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__FACTURA__sedeId__0E6E26BF" Association="Self.FK__FACTURA__sedeId__0E6E26BF">
+      <End Role="SEDE" EntitySet="SEDE" />
+      <End Role="FACTURA" EntitySet="FACTURA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FACTURA__UserId__0F624AF8" Association="Self.FK__FACTURA__UserId__0F624AF8">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="FACTURA" EntitySet="FACTURA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FACTURA_P__factu__114A936A" Association="Self.FK__FACTURA_P__factu__114A936A">
+      <End Role="FACTURA" EntitySet="FACTURA" />
+      <End Role="FACTURA_PRODUCTO" EntitySet="FACTURA_PRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FACTURA_P__produ__123EB7A3" Association="Self.FK__FACTURA_P__produ__123EB7A3">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="FACTURA_PRODUCTO" EntitySet="FACTURA_PRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRODUCTO__paisId__76969D2E" Association="Self.FK__PRODUCTO__paisId__76969D2E">
+      <End Role="PAIS" EntitySet="PAIS" />
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SEDE__inventario__71D1E811" Association="Self.FK__SEDE__inventario__71D1E811">
+      <End Role="INVENTARIO" EntitySet="INVENTARIO" />
+      <End Role="SEDE" EntitySet="SEDE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__USUARIO__cliente__7E37BEF6" Association="Self.FK__USUARIO__cliente__7E37BEF6">
+      <End Role="CLIENTE" EntitySet="CLIENTE" />
+      <End Role="USUARIO" EntitySet="USUARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INVENTARIO_PRODUCTO_INVENTARIO" Association="Self.FK_INVENTARIO_PRODUCTO_INVENTARIO">
+      <End Role="INVENTARIO" EntitySet="INVENTARIO" />
+      <End Role="INVENTARIO_PRODUCTO" EntitySet="INVENTARIO_PRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INVENTARIO_PRODUCTO_PRODUCTO" Association="Self.FK_INVENTARIO_PRODUCTO_PRODUCTO">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="INVENTARIO_PRODUCTO" EntitySet="INVENTARIO_PRODUCTO" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

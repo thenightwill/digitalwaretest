@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DIGITALWARETESTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CLIENTE">
+    <Key>
+      <PropertyRef Name="clienteId" />
+    </Key>
+    <Property Name="clienteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="numeroIdentificaionCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="primerNombreCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="primerApellidoCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="segundoNombreCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="segundoApellidoCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="tipoIdentificacionCliente" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="direccionCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="correoCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="telefonofijoCliente" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="telefonocelCliente" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fechaNacimientoCliente" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="USUARIO" Relationship="DIGITALWARETESTModel.FK__USUARIO__cliente__7E37BEF6" FromRole="CLIENTE" ToRole="USUARIO" />
+  </EntityType>
+  <EntityType Name="PAIS">
+    <Key>
+      <PropertyRef Name="paisId" />
+    </Key>
+    <Property Name="paisId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombrePais" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="PRODUCTO" Relationship="DIGITALWARETESTModel.FK__PRODUCTO__paisId__76969D2E" FromRole="PAIS" ToRole="PRODUCTO" />
+  </EntityType>
+  <EntityType Name="SEDE">
+    <Key>
+      <PropertyRef Name="sedeId" />
+    </Key>
+    <Property Name="sedeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombreSede" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="direccionSede" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="inventarioId" Type="Int32" />
+    <NavigationProperty Name="INVENTARIO" Relationship="DIGITALWARETESTModel.FK__SEDE__inventario__71D1E811" FromRole="SEDE" ToRole="INVENTARIO" />
+    <NavigationProperty Name="FACTURA" Relationship="DIGITALWARETESTModel.FK__FACTURA__sedeId__0E6E26BF" FromRole="SEDE" ToRole="FACTURA" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityContainer Name="DIGITALWARETESTEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
+    <EntitySet Name="PAIS" EntityType="Self.PAIS" />
+    <EntitySet Name="SEDE" EntityType="Self.SEDE" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="INVENTARIO" EntityType="DIGITALWARETESTModel.INVENTARIO" />
+    <AssociationSet Name="FK__SEDE__inventario__71D1E811" Association="DIGITALWARETESTModel.FK__SEDE__inventario__71D1E811">
+      <End Role="INVENTARIO" EntitySet="INVENTARIO" />
+      <End Role="SEDE" EntitySet="SEDE" />
+    </AssociationSet>
+    <EntitySet Name="FACTURA" EntityType="DIGITALWARETESTModel.FACTURA" />
+    <EntitySet Name="FACTURA_PRODUCTO" EntityType="DIGITALWARETESTModel.FACTURA_PRODUCTO" />
+    <EntitySet Name="PRODUCTO" EntityType="DIGITALWARETESTModel.PRODUCTO" />
+    <AssociationSet Name="FK__FACTURA__sedeId__0E6E26BF" Association="DIGITALWARETESTModel.FK__FACTURA__sedeId__0E6E26BF">
+      <End Role="SEDE" EntitySet="SEDE" />
+      <End Role="FACTURA" EntitySet="FACTURA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FACTURA_P__factu__114A936A" Association="DIGITALWARETESTModel.FK__FACTURA_P__factu__114A936A">
+      <End Role="FACTURA" EntitySet="FACTURA" />
+      <End Role="FACTURA_PRODUCTO" EntitySet="FACTURA_PRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FACTURA_P__produ__123EB7A3" Association="DIGITALWARETESTModel.FK__FACTURA_P__produ__123EB7A3">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="FACTURA_PRODUCTO" EntitySet="FACTURA_PRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRODUCTO__paisId__76969D2E" Association="DIGITALWARETESTModel.FK__PRODUCTO__paisId__76969D2E">
+      <End Role="PAIS" EntitySet="PAIS" />
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="INVENTARIO_PRODUCTO" Association="DIGITALWARETESTModel.INVENTARIO_PRODUCTO">
+      <End Role="INVENTARIO" EntitySet="INVENTARIO" />
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+    </AssociationSet>
+    <EntitySet Name="USUARIO" EntityType="DIGITALWARETESTModel.USUARIO" />
+    <AssociationSet Name="FK__USUARIO__cliente__7E37BEF6" Association="DIGITALWARETESTModel.FK__USUARIO__cliente__7E37BEF6">
+      <End Role="CLIENTE" EntitySet="CLIENTE" />
+      <End Role="USUARIO" EntitySet="USUARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FACTURA__UserId__0F624AF8" Association="DIGITALWARETESTModel.FK__FACTURA__UserId__0F624AF8">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="FACTURA" EntitySet="FACTURA" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="INVENTARIO">
+    <Key>
+      <PropertyRef Name="inventarioId" />
+    </Key>
+    <Property Name="inventarioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SEDE" Relationship="DIGITALWARETESTModel.FK__SEDE__inventario__71D1E811" FromRole="INVENTARIO" ToRole="SEDE" />
+    <NavigationProperty Name="PRODUCTO" Relationship="DIGITALWARETESTModel.INVENTARIO_PRODUCTO" FromRole="INVENTARIO" ToRole="PRODUCTO" />
+  </EntityType>
+  <Association Name="FK__SEDE__inventario__71D1E811">
+    <End Type="DIGITALWARETESTModel.INVENTARIO" Role="INVENTARIO" Multiplicity="0..1" />
+    <End Type="DIGITALWARETESTModel.SEDE" Role="SEDE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INVENTARIO">
+        <PropertyRef Name="inventarioId" />
+      </Principal>
+      <Dependent Role="SEDE">
+        <PropertyRef Name="inventarioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="FACTURA">
+    <Key>
+      <PropertyRef Name="facturaId" />
+    </Key>
+    <Property Name="facturaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="totalFactura" Type="Double" Nullable="false" />
+    <Property Name="subtotalFactura" Type="Double" Nullable="false" />
+    <Property Name="IVAFactura" Type="Double" Nullable="false" />
+    <Property Name="fechaFactura" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="sedeId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="SEDE" Relationship="DIGITALWARETESTModel.FK__FACTURA__sedeId__0E6E26BF" FromRole="FACTURA" ToRole="SEDE" />
+    <NavigationProperty Name="FACTURA_PRODUCTO" Relationship="DIGITALWARETESTModel.FK__FACTURA_P__factu__114A936A" FromRole="FACTURA" ToRole="FACTURA_PRODUCTO" />
+    <NavigationProperty Name="USUARIO" Relationship="DIGITALWARETESTModel.FK__FACTURA__UserId__0F624AF8" FromRole="FACTURA" ToRole="USUARIO" />
+  </EntityType>
+  <EntityType Name="FACTURA_PRODUCTO">
+    <Key>
+      <PropertyRef Name="facturaId" />
+      <PropertyRef Name="productoId" />
+    </Key>
+    <Property Name="facturaId" Type="Int32" Nullable="false" />
+    <Property Name="productoId" Type="Int32" Nullable="false" />
+    <Property Name="cantidadFactura" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="FACTURA" Relationship="DIGITALWARETESTModel.FK__FACTURA_P__factu__114A936A" FromRole="FACTURA_PRODUCTO" ToRole="FACTURA" />
+    <NavigationProperty Name="PRODUCTO" Relationship="DIGITALWARETESTModel.FK__FACTURA_P__produ__123EB7A3" FromRole="FACTURA_PRODUCTO" ToRole="PRODUCTO" />
+  </EntityType>
+  <EntityType Name="PRODUCTO">
+    <Key>
+      <PropertyRef Name="productoId" />
+    </Key>
+    <Property Name="productoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombreProducto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="marcaProducto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="fechaExpedicionProducto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="fechaVencimientoProducto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="precioProducto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="paisId" Type="Int32" />
+    <NavigationProperty Name="FACTURA_PRODUCTO" Relationship="DIGITALWARETESTModel.FK__FACTURA_P__produ__123EB7A3" FromRole="PRODUCTO" ToRole="FACTURA_PRODUCTO" />
+    <NavigationProperty Name="PAIS" Relationship="DIGITALWARETESTModel.FK__PRODUCTO__paisId__76969D2E" FromRole="PRODUCTO" ToRole="PAIS" />
+    <NavigationProperty Name="INVENTARIO" Relationship="DIGITALWARETESTModel.INVENTARIO_PRODUCTO" FromRole="PRODUCTO" ToRole="INVENTARIO" />
+  </EntityType>
+  <Association Name="FK__FACTURA__sedeId__0E6E26BF">
+    <End Type="DIGITALWARETESTModel.SEDE" Role="SEDE" Multiplicity="0..1" />
+    <End Type="DIGITALWARETESTModel.FACTURA" Role="FACTURA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SEDE">
+        <PropertyRef Name="sedeId" />
+      </Principal>
+      <Dependent Role="FACTURA">
+        <PropertyRef Name="sedeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FACTURA_P__factu__114A936A">
+    <End Type="DIGITALWARETESTModel.FACTURA" Role="FACTURA" Multiplicity="1" />
+    <End Type="DIGITALWARETESTModel.FACTURA_PRODUCTO" Role="FACTURA_PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FACTURA">
+        <PropertyRef Name="facturaId" />
+      </Principal>
+      <Dependent Role="FACTURA_PRODUCTO">
+        <PropertyRef Name="facturaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FACTURA_P__produ__123EB7A3">
+    <End Type="DIGITALWARETESTModel.PRODUCTO" Role="PRODUCTO" Multiplicity="1" />
+    <End Type="DIGITALWARETESTModel.FACTURA_PRODUCTO" Role="FACTURA_PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="productoId" />
+      </Principal>
+      <Dependent Role="FACTURA_PRODUCTO">
+        <PropertyRef Name="productoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRODUCTO__paisId__76969D2E">
+    <End Type="DIGITALWARETESTModel.PAIS" Role="PAIS" Multiplicity="0..1" />
+    <End Type="DIGITALWARETESTModel.PRODUCTO" Role="PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PAIS">
+        <PropertyRef Name="paisId" />
+      </Principal>
+      <Dependent Role="PRODUCTO">
+        <PropertyRef Name="paisId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="INVENTARIO_PRODUCTO">
+    <End Type="DIGITALWARETESTModel.INVENTARIO" Role="INVENTARIO" Multiplicity="*" />
+    <End Type="DIGITALWARETESTModel.PRODUCTO" Role="PRODUCTO" Multiplicity="*" />
+  </Association>
+  <EntityType Name="USUARIO">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="clienteId" Type="Int32" />
+    <NavigationProperty Name="CLIENTE" Relationship="DIGITALWARETESTModel.FK__USUARIO__cliente__7E37BEF6" FromRole="USUARIO" ToRole="CLIENTE" />
+    <NavigationProperty Name="FACTURA" Relationship="DIGITALWARETESTModel.FK__FACTURA__UserId__0F624AF8" FromRole="USUARIO" ToRole="FACTURA" />
+  </EntityType>
+  <Association Name="FK__USUARIO__cliente__7E37BEF6">
+    <End Type="DIGITALWARETESTModel.CLIENTE" Role="CLIENTE" Multiplicity="0..1" />
+    <End Type="DIGITALWARETESTModel.USUARIO" Role="USUARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENTE">
+        <PropertyRef Name="clienteId" />
+      </Principal>
+      <Dependent Role="USUARIO">
+        <PropertyRef Name="clienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FACTURA__UserId__0F624AF8">
+    <End Type="DIGITALWARETESTModel.USUARIO" Role="USUARIO" Multiplicity="0..1" />
+    <End Type="DIGITALWARETESTModel.FACTURA" Role="FACTURA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="FACTURA">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

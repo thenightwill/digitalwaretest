@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="136c2d25c52e43ab93bde4995900da5d" Name="Diagram1">
+        <EntityTypeShape EntityType="DIGITALWARETESTModel.CLIENTE" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DIGITALWARETESTModel.PAIS" Width="1.5" PointX="1.875" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DIGITALWARETESTModel.SEDE" Width="1.5" PointX="10" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DIGITALWARETESTModel.sysdiagrams" Width="1.5" PointX="1" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DIGITALWARETESTModel.INVENTARIO" Width="1.5" PointX="11.75" PointY="1.75" />
+        <AssociationConnector Association="DIGITALWARETESTModel.FK__SEDE__inventario__71D1E811" />
+        <EntityTypeShape EntityType="DIGITALWARETESTModel.FACTURA" Width="1.5" PointX="12.25" PointY="4.375" />
+        <EntityTypeShape EntityType="DIGITALWARETESTModel.FACTURA_PRODUCTO" Width="1.5" PointX="17.25" PointY="5.25" />
+        <EntityTypeShape EntityType="DIGITALWARETESTModel.PRODUCTO" Width="1.5" PointX="15" PointY="5" />
+        <AssociationConnector Association="DIGITALWARETESTModel.FK__FACTURA__sedeId__0E6E26BF" />
+        <AssociationConnector Association="DIGITALWARETESTModel.FK__FACTURA_P__factu__114A936A" />
+        <AssociationConnector Association="DIGITALWARETESTModel.FK__FACTURA_P__produ__123EB7A3" />
+        <AssociationConnector Association="DIGITALWARETESTModel.FK__PRODUCTO__paisId__76969D2E" />
+        <AssociationConnector Association="DIGITALWARETESTModel.INVENTARIO_PRODUCTO" />
+        <EntityTypeShape EntityType="DIGITALWARETESTModel.USUARIO" Width="1.5" PointX="3" PointY="6" />
+        <AssociationConnector Association="DIGITALWARETESTModel.FK__USUARIO__cliente__7E37BEF6" />
+        <AssociationConnector Association="DIGITALWARETESTModel.FK__FACTURA__UserId__0F624AF8" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
